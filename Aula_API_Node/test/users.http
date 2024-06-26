@@ -1,0 +1,22 @@
+@url = http://localhost:3000/users
+
+###Criar
+POST {{url}}
+Content-Type: application/json
+Authorization: 
+
+{
+    "name": "Ana",
+    "email": "ana@hotmail.com",
+    "password": "12345",
+    "birth": "2002-09-26"
+}
+
+###GetAll
+GET {{url}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmI4YzIwYzhjZjExZTM0ZmViNzc2YSIsImlhdCI6MTcxNDEzMjYyOCwiZXhwIjoxNzE0MTM2MjI4fQ.CsTh9ljcn9XuOumrywdSCPiz2bVmca0tttooLqVdqTM
+
+
+###GetID
+GET {{url}}/6628f395c862a481ef874a9d
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmI4YzIwYzhjZjExZTM0ZmViNzc2YSIsImlhdCI6MTcxNDEzMjYyOCwiZXhwIjoxNzE0MTM2MjI4fQ.CsTh9ljcn9XuOumrywdSCPiz2bVmca0tttooLqVdqTM

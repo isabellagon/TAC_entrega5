@@ -1,0 +1,39 @@
+@url = http://localhost:3000/evento
+
+###Criar
+POST {{url}}
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgzMzg0MywiZXhwIjoxNzE2ODY5ODQzLCJpc3MiOiJVVEZQUiJ9.rLFM6LWIoNeUjA06zGzqdrqwoiI_V0_SWmcCC9GP5r4
+
+{
+    "nome": "teste",
+    "tipo": "testes",
+    "dispositivoID": "1",
+    "detalhes": "2002-09-26"
+}
+
+###Atualizar
+PUT  {{url}}/6654cfc15fee06c52168af48
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgzMzg0MywiZXhwIjoxNzE2ODY5ODQzLCJpc3MiOiJVVEZQUiJ9.rLFM6LWIoNeUjA06zGzqdrqwoiI_V0_SWmcCC9GP5r4
+
+{
+    "nome": "teste",
+    "tipo": "testes",
+    "dispositivoID": "2",
+    "detalhes": "2002-09-26"
+}
+
+###Deletar
+DELETE {{url}}/6654cfc15fee06c52168af48
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgzMzg0MywiZXhwIjoxNzE2ODY5ODQzLCJpc3MiOiJVVEZQUiJ9.rLFM6LWIoNeUjA06zGzqdrqwoiI_V0_SWmcCC9GP5r4
+
+
+###GetAll
+GET {{url}}
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgzMzg0MywiZXhwIjoxNzE2ODY5ODQzLCJpc3MiOiJVVEZQUiJ9.rLFM6LWIoNeUjA06zGzqdrqwoiI_V0_SWmcCC9GP5r4
+
+
+###GetID
+GET {{url}}/6654cfc15fee06c52168af48
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgzMzg0MywiZXhwIjoxNzE2ODY5ODQzLCJpc3MiOiJVVEZQUiJ9.rLFM6LWIoNeUjA06zGzqdrqwoiI_V0_SWmcCC9GP5r4

@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./app-react
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=development
+
+  backend:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-postgres:5432/db_todo
+    depends_on:
+      - db-postgres
+
+  service-node:
+    build:
+      context: ./Aula_API_Node
+      dockerfile: Dockerfile
+    ports: 
+      - "3001:3001"
+
+  db-postgres:
+    build:
+      context: ./Db
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 26062002
+      POSTGRES_DB: db_todo
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:

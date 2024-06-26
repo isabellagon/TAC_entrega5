@@ -1,0 +1,38 @@
+@URL=http://localhost:8080/sensor
+
+### CREATE
+POST {{URL}}
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgwODM5NSwiZXhwIjoxNzE2ODQ0Mzk1LCJpc3MiOiJVVEZQUiJ9.06JB-OLYcb3Qlynn0Yi4N0Kd8zEoN13ODcJUKchsAjg
+
+{
+    "nome": "testeq",
+    "tipo": "testeq",
+    "dispositivoid": 1
+    
+}
+
+### Obter todas as pessoas
+GET {{URL}}
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgwODM5NSwiZXhwIjoxNzE2ODQ0Mzk1LCJpc3MiOiJVVEZQUiJ9.06JB-OLYcb3Qlynn0Yi4N0Kd8zEoN13ODcJUKchsAjg
+
+
+### Obter um gateway
+GET {{URL}}/2
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgwODM5NSwiZXhwIjoxNzE2ODQ0Mzk1LCJpc3MiOiJVVEZQUiJ9.06JB-OLYcb3Qlynn0Yi4N0Kd8zEoN13ODcJUKchsAjg
+
+
+### Atualizar um gateway
+PUT {{URL}}/1
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgwODM5NSwiZXhwIjoxNzE2ODQ0Mzk1LCJpc3MiOiJVVEZQUiJ9.06JB-OLYcb3Qlynn0Yi4N0Kd8zEoN13ODcJUKchsAjg
+
+{
+    "nome": "Anas",
+    "tipo": "aa",
+    "dispositivoid": 2
+}
+
+### Deletar uma pessoa
+DELETE {{URL}}/2
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgwODM5NSwiZXhwIjoxNzE2ODQ0Mzk1LCJpc3MiOiJVVEZQUiJ9.06JB-OLYcb3Qlynn0Yi4N0Kd8zEoN13ODcJUKchsAjg
