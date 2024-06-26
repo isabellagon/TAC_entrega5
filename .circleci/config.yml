@@ -10,23 +10,28 @@ jobs:
     executor: docker-executor
     steps:
       - checkout
+
+      # Instalação do Docker Compose
       - run:
           name: Install Docker Compose
           command: |
             sudo apt-get update
             sudo apt-get install -y docker-compose
 
+      # Remoção de containers e imagens existentes
       - run:
           name: Remove existing Docker containers and images
           command: |
             docker-compose down -v --remove-orphans
             docker-compose rm -f -s -v
 
+      # Construção e inicialização dos serviços
       - run:
           name: Build and start services
           command: |
             docker-compose up -d --build
 
+      # Envio de e-mail de notificação
       - run:
           name: Send notification email
           command: |
