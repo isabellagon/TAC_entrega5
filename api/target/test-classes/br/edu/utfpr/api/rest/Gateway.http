@@ -1,0 +1,37 @@
+@URL=http://localhost:8080/gateway
+
+### CREATE
+POST {{URL}}
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VySWQiOiIxIiwidXNlcm5hbWUiOiJhYXNAaHRtYWlsIiwiaWF0IjoxNzE3NDM0MTg3LCJleHAiOjE3MTc0NzAxODcsImlzcyI6IlVURlBSIn0.psWH50TmFL7VzT3NQjY2hCkw46S3smGn-iTdVyBXNiQ
+
+{
+    "nome": "tessste11",
+    "descricao": "tesste1",
+    "pessoaid": 1
+    
+}
+
+### Obter todas as pessoas
+GET {{URL}}
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgwODM5NSwiZXhwIjoxNzE2ODQ0Mzk1LCJpc3MiOiJVVEZQUiJ9.06JB-OLYcb3Qlynn0Yi4N0Kd8zEoN13ODcJUKchsAjg
+
+### Obter um gateway
+GET {{URL}}/2
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgwODM5NSwiZXhwIjoxNzE2ODQ0Mzk1LCJpc3MiOiJVVEZQUiJ9.06JB-OLYcb3Qlynn0Yi4N0Kd8zEoN13ODcJUKchsAjg
+
+
+### Atualizar um gateway
+PUT {{URL}}/1
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgwODM5NSwiZXhwIjoxNzE2ODQ0Mzk1LCJpc3MiOiJVVEZQUiJ9.06JB-OLYcb3Qlynn0Yi4N0Kd8zEoN13ODcJUKchsAjg
+
+{
+    "nome": "Anas",
+    "descricao": "reste",
+    "pessoaid": 2
+}
+
+### Deletar uma pessoa
+DELETE {{URL}}/2
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJ1c2VybmFtZSI6ImFhQGh0bWFpbCIsImlhdCI6MTcxNjgwODM5NSwiZXhwIjoxNzE2ODQ0Mzk1LCJpc3MiOiJVVEZQUiJ9.06JB-OLYcb3Qlynn0Yi4N0Kd8zEoN13ODcJUKchsAjg
