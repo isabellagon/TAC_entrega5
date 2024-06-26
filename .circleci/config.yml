@@ -11,32 +11,26 @@ jobs:
     steps:
       - checkout
 
-      # Instalação do Docker Compose
+      # Configuração do Docker Host
       - run:
-          name: Install Docker Compose
+          name: Set Docker Host
           command: |
-            sudo apt-get update
-            sudo apt-get install -y docker-compose
+            export DOCKER_HOST=tcp://localhost:2375  # Exemplo de configuração para o Docker TCP
+            # Comandos restantes do job
 
-      # Remoção de containers e imagens existentes
       - run:
           name: Remove existing Docker containers and images
           command: |
-            docker-compose down -v --remove-orphans
-            docker-compose rm -f -s -v
+            docker container rm -f frontend || true
+            docker container rm -f backend || true
+            docker container rm -f service-node || true
+            docker container rm -f db-postgres || true
+            docker image rm -f frontend || true
+            docker image rm -f backend || true
+            docker image rm -f service-node || true
+            docker image rm -f db-postgres || true
 
-      # Construção e inicialização dos serviços
-      - run:
-          name: Build and start services
-          command: |
-            docker-compose up -d --build
-
-      # Envio de e-mail de notificação
-      - run:
-          name: Send notification email
-          command: |
-            sudo apt-get install -y mailutils
-            echo "Build and Deploy Job: Success" | mail -s "CircleCI Job Status" your-email@example.com
+      # Restante dos passos do seu job
 
 workflows:
   version: 2
