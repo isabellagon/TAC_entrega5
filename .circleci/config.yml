@@ -15,12 +15,12 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y docker.io
+      - setup_remote_docker
       - run:
           name: Remove existing Docker container and image
           command: |
             docker container rm -f my_app_container || true
             docker image rm -f my_app_image || true
-      - setup_remote_docker
       - run:
           name: Build Docker image
           command: docker build -t my_app_image .
@@ -35,13 +35,10 @@ jobs:
 
 workflows:
   version: 2
-  daily-build:
-    triggers:
-      - schedule:
-          cron: "0 2 * * *"
+  commit-build:
+    jobs:
+      - build-and-deploy:
           filters:
             branches:
               only:
                 - main
-    jobs:
-      - build-and-deploy
