@@ -3,7 +3,7 @@ version: '3.3'
 services:
   frontend:
     build:
-      context: ./app-react
+      context: ./app_react
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
