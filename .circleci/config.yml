@@ -11,39 +11,21 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Docker CLI
+          name: Install Docker Compose
           command: |
             sudo apt-get update
-            sudo apt-get install -y docker.io
-      - setup_remote_docker
+            sudo apt-get install -y docker-compose
 
       - run:
           name: Remove existing Docker containers and images
           command: |
-            docker container rm -f service1_container || true
-            docker container rm -f service2_container || true
-            docker container rm -f service3_container || true
-            docker container rm -f service4_container || true
-            docker image rm -f service1_image || true
-            docker image rm -f service2_image || true
-            docker image rm -f service3_image || true
-            docker image rm -f service4_image || true
+            docker-compose down -v --remove-orphans
+            docker-compose rm -f -s -v
 
       - run:
-          name: Build Docker images
+          name: Build and start services
           command: |
-            docker build -t service1_image -f service1/Dockerfile.service1 service1
-            docker build -t service2_image -f service2/Dockerfile.service2 service2
-            docker build -t service3_image -f service3/Dockerfile.service3 service3
-            docker build -t service4_image -f service4/Dockerfile.service4 service4
-
-      - run:
-          name: Create and start Docker containers
-          command: |
-            docker run -d --name service1_container service1_image
-            docker run -d --name service2_container service2_image
-            docker run -d --name service3_container service3_image
-            docker run -d --name service4_container service4_image
+            docker-compose up -d --build
 
       - run:
           name: Send notification email
