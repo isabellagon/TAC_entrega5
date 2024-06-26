@@ -11,6 +11,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Docker CLI
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y docker.io
+      - run:
           name: Remove existing Docker container and image
           command: |
             docker container rm -f my_app_container || true
@@ -22,6 +27,11 @@ jobs:
       - run:
           name: Create and start Docker container
           command: docker run -d --name my_app_container my_app_image
+      - run:
+          name: Send notification email
+          command: |
+            sudo apt-get install -y mailutils
+            echo "Build and Deploy Job: Success" | mail -s "CircleCI Job Status" your-email@example.com
 
 workflows:
   version: 2
