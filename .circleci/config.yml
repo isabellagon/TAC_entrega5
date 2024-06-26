@@ -6,19 +6,32 @@ executors:
       - image: circleci/python:3.8
 
 jobs:
-  test:
+  build-and-deploy:
     executor: docker-executor
     steps:
       - checkout
       - run:
-          name: Install dependencies
-          command: pip install -r requirements.txt
+          name: Remove existing Docker container and image
+          command: |
+            docker container rm -f my_app_container || true
+            docker image rm -f my_app_image || true
+      - setup_remote_docker
       - run:
-          name: Run tests
-          command: pytest
+          name: Build Docker image
+          command: docker build -t my_app_image .
+      - run:
+          name: Create and start Docker container
+          command: docker run -d --name my_app_container my_app_image
 
 workflows:
   version: 2
-  test:
+  daily-build:
+    triggers:
+      - schedule:
+          cron: "0 2 * * *"
+          filters:
+            branches:
+              only:
+                - main
     jobs:
-      - test
+      - build-and-deploy
