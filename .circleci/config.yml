@@ -32,10 +32,10 @@ jobs:
       - run:
           name: Build Docker images
           command: |
-            docker build -t service1_image -f Dockerfile.service1 .
-            docker build -t service2_image -f Dockerfile.service2 .
-            docker build -t service3_image -f Dockerfile.service3 .
-            docker build -t service4_image -f Dockerfile.service4 .
+            docker build -t service1_image -f service1/Dockerfile.service1 service1
+            docker build -t service2_image -f service2/Dockerfile.service2 service2
+            docker build -t service3_image -f service3/Dockerfile.service3 service3
+            docker build -t service4_image -f service4/Dockerfile.service4 service4
 
       - run:
           name: Create and start Docker containers
