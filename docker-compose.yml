@@ -68,13 +68,6 @@ jobs:
             docker run -d --name backend-container -p 8081:80 backend-image
             docker run -d --name service-node-container -p 8082:80 service-node-image
 
-      # Envio de e-mail de notificação
-      - run:
-          name: Send notification email
-          command: |
-            sudo apt-get update && sudo apt-get install -y mailutils
-            echo "Build and Deploy Job: Success" | mail -s "CircleCI Job Status" your-email@example.com
-
 workflows:
   version: 2
   commit-build:
