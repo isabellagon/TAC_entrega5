@@ -1,45 +1,86 @@
-version: '3.3'
+version: 2.1
 
-services:
-  frontend:
-    build:
-      context: ./app_react
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-    environment:
-      - NODE_ENV=development
+executors:
+  docker-executor:
+    docker:
+      - image: python:3.8
 
-  backend:
-    build:
-      context: ./api
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-postgres:5432/db_todo
-    depends_on:
-      - db-postgres
+jobs:
+  build-and-deploy:
+    executor: docker-executor
+    steps:
+      - checkout
 
-  service-node:
-    build:
-      context: ./Aula_API_Node
-      dockerfile: Dockerfile
-    ports: 
-      - "3001:3001"
+      # Instalação do Docker
+      - setup_remote_docker:
+          version: 20.10.7
 
-  db-postgres:
-    build:
-      context: ./Db
-      dockerfile: Dockerfile
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 26062002
-      POSTGRES_DB: db_todo
-    ports:
-      - "5432:5432"
+      # Verificação da presença dos Dockerfiles
+      - run:
+          name: Check for Dockerfiles
+          command: |
+            ls -la
+            if [ ! -f frontend/Dockerfile ]; then
+              echo "Dockerfile not found in the frontend directory"
+              exit 1
+            fi
+            if [ ! -f backend/Dockerfile ]; then
+              echo "Dockerfile not found in the backend directory"
+              exit 1
+            fi
+            if [ ! -f service-node/Dockerfile ]; then
+              echo "Dockerfile not found in the service-node directory"
+              exit 1
+            fi
 
-volumes:
-  postgres_data:
+      # Remove containers e imagens existentes
+      - run:
+          name: Remove existing Docker containers and images
+          command: |
+            docker container rm -f frontend || true
+            docker container rm -f backend || true
+            docker container rm -f service-node || true
+            docker container rm -f db-postgres || true
+            docker image rm -f frontend || true
+            docker image rm -f backend || true
+            docker image rm -f service-node || true
+            docker image rm -f db-postgres || true
+
+      # Build das imagens
+      - run:
+          name: Build frontend Docker image
+          command: |
+            docker build -t frontend-image ./frontend
+      - run:
+          name: Build backend Docker image
+          command: |
+            docker build -t backend-image ./backend
+      - run:
+          name: Build service-node Docker image
+          command: |
+            docker build -t service-node-image ./service-node
+
+      # Criação e inicialização dos containers
+      - run:
+          name: Create and start Docker containers
+          command: |
+            docker run -d --name frontend-container -p 8080:80 frontend-image
+            docker run -d --name backend-container -p 8081:80 backend-image
+            docker run -d --name service-node-container -p 8082:80 service-node-image
+
+      # Envio de e-mail de notificação
+      - run:
+          name: Send notification email
+          command: |
+            sudo apt-get update && sudo apt-get install -y mailutils
+            echo "Build and Deploy Job: Success" | mail -s "CircleCI Job Status" your-email@example.com
+
+workflows:
+  version: 2
+  commit-build:
+    jobs:
+      - build-and-deploy:
+          filters:
+            branches:
+              only:
+                - main
