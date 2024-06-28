@@ -3,7 +3,7 @@ version: 2.1
 executors:
   docker-executor:
     docker:
-      - image: python:3.8
+      - image: circleci/python:3.8
 
 jobs:
   build-and-deploy:
@@ -21,15 +21,15 @@ jobs:
           command: |
             ls -la
             if [ ! -f ./app_react/Dockerfile ]; then
-              echo "Dockerfile not found in the frontend directory"
+              echo "Dockerfile not found in the app_react directory"
               exit 1
             fi
             if [ ! -f ./api/Dockerfile ]; then
-              echo "Dockerfile not found in the backend directory"
+              echo "Dockerfile not found in the api directory"
               exit 1
             fi
             if [ ! -f ./Aula_API_Node/Dockerfile ]; then
-              echo "Dockerfile not found in the service-node directory"
+              echo "Dockerfile not found in the Aula_API_Node directory"
               exit 1
             fi
 
@@ -37,13 +37,13 @@ jobs:
       - run:
           name: Remove existing Docker containers and images
           command: |
-            docker container rm -f frontend || true
-            docker container rm -f backend || true
-            docker container rm -f service-node || true
+            docker container rm -f frontend-container || true
+            docker container rm -f backend-container || true
+            docker container rm -f service-node-container || true
             docker container rm -f db-postgres || true
-            docker image rm -f frontend || true
-            docker image rm -f backend || true
-            docker image rm -f service-node || true
+            docker image rm -f frontend-image || true
+            docker image rm -f backend-image || true
+            docker image rm -f service-node-image || true
             docker image rm -f db-postgres || true
 
       # Build das imagens
