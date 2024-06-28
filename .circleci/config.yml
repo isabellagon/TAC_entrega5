@@ -24,11 +24,11 @@ jobs:
               echo "Dockerfile not found in the frontend directory"
               exit 1
             fi
-            if [ ! -f backend/Dockerfile ]; then
+            if [ ! -f ./api/Dockerfile ]; then
               echo "Dockerfile not found in the backend directory"
               exit 1
             fi
-            if [ ! -f service-node/Dockerfile ]; then
+            if [ ! -f ./Aula_API_Node/Dockerfile ]; then
               echo "Dockerfile not found in the service-node directory"
               exit 1
             fi
