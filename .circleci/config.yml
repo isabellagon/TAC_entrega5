@@ -20,7 +20,7 @@ jobs:
           name: Check for Dockerfiles
           command: |
             ls -la
-            if [ ! -f .app_react/Dockerfile ]; then
+            if [ ! -f ./app_react/Dockerfile ]; then
               echo "Dockerfile not found in the frontend directory"
               exit 1
             fi
