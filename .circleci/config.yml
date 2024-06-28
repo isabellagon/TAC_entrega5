@@ -50,15 +50,15 @@ jobs:
       - run:
           name: Build frontend Docker image
           command: |
-            docker build -t frontend-image ./frontend
+            docker build -t frontend-image ./app_react
       - run:
           name: Build backend Docker image
           command: |
-            docker build -t backend-image ./backend
+            docker build -t backend-image ./api
       - run:
           name: Build service-node Docker image
           command: |
-            docker build -t service-node-image ./service-node
+            docker build -t service-node-image ./Aula_API_Node
 
       # Criação e inicialização dos containers
       - run:
